@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {
+.controller('DashCtrl', function($scope, $ionicPopup) {
   // <!-- class -->
   function Reservation(inName, inPartySize) {
     // <!-- variables -->
@@ -38,6 +38,10 @@ angular.module('starter.controllers', [])
       WaitingListHandler.prototype.waitingListQueue = [];
       WaitingListHandler.prototype.waitingListSearchKeys = [];
       WaitingListHandler.prototype.numOfReservations = 0;
+
+      WaitingListHandler.prototype.getWaitTime = function() {
+        return this.numOfReservations * 10;
+      }
 
       WaitingListHandler.prototype.updateQueuePositions = function (){
         for(var i = 0; i < this.numOfReservations; i++) {
@@ -89,6 +93,14 @@ angular.module('starter.controllers', [])
     //    error: function (RcvData, error) {
     //       console.log(RcvData);
     //    }
+  }
+
+  $scope.showAlert = function() {
+    var time = $scope.reservationHandler.getWaitTime();
+    var alertPopup = $ionicPopup.alert({
+       title: 'Estimated Waiting Time',
+       template: '<center>' + time + ' minutes</center>'
+     });
   }
 
   $scope.removeUser = function(name) {
