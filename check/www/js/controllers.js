@@ -1,8 +1,11 @@
 angular.module('starter.controllers', [])
 
 .controller('RestaurantsCtrl', function($scope, $cordovaGeolocation) {
-  $scope.listing = [];
-  var listNum = 0;
+  // document.addEventListener("deviceready", function () {
+  //   $cordovaPlugin.someFunction().then(success, error);
+  // }, false);
+  //$scope.listing = [ {name: 'test'} ];
+
   var posOptions = {timeout: 10000, enableHighAccuracy: false};
   var location = $cordovaGeolocation.getCurrentPosition(posOptions);
   location.then(function (position) {
@@ -17,21 +20,25 @@ angular.module('starter.controllers', [])
       //   return v;
       // });
 
-      var url = 'https://api.soleo.com/businesses?Category=Restaurants&Latitude=' + latitude + '&Longitude=' + longitude + '&Radius=10&APIKey=hnqee6js7rekm8txj7p6fqbw';
+      var url = 'https://api.soleo.com/businesses?Category=Restaurants&Latitude=' + latitude + '&Longitude=' + longitude + '&Radius=20&APIKey=hnqee6js7rekm8txj7p6fqbw';
 
-      $.getJSON(url,function(data) { dataResponse(data.businesses); });
-    }, function(err) {
-      // error
-    });
-  //function dataResponse(data) { listing = data; console.log(listing); };
-  function dataResponse(data) {
-    for (i = 0; i < data.length; i++) {
-      $scope.listing[i] = data[i];
-      console.log($scope.listing[i]);
-      console.log(data[i]);
-      listNum++;
-    }
-  };
+      $.getJSON(url,function(data) {
+        $scope.listing = data.businesses; 
+            for (i = 0; i < 7; i++) {
+              var list = document.getElementById('listing').innerHTML + '<div class="list card"><div class="item"><h2>' + $scope.listing[i].name + '</h2><p>' + $scope.listing[i].address + " " + $scope.listing[i].city + " " + $scope.listing[i].state + " " + $scope.listing[i].zip + '</p></div><a class="item item-icon-left assertive" href="#"><i class="icon ion-android-navigate"></i>Navigate</a>';
+              document.getElementById('listing').innerHTML = list;
+                // document.write('<a class="item item-icon-left assertive" href="#">');
+                //   document.write('<i class="icon ion-android-navigate"></i>');
+                //   document.write('Navigate');
+                // document.write('</a>');
+              }
+
+        //document.write($scope.listing[0].name);
+      });
+  }, function(err) {
+    // error
+  });
+
 })
 
 .controller('DashCtrl', function($scope) {})
