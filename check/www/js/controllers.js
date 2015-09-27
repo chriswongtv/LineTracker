@@ -14,11 +14,11 @@ angular.module('starter.controllers', [])
       console.log(latitude);
       console.log(longitude);
 
-      var url = 'https://api.soleo.com/businesses?Category=Restaurants&Latitude=' + latitude + '&Longitude=' + longitude + '&Radius=20&APIKey=hnqee6js7rekm8txj7p6fqbw';
-
+      var url = 'https://api.soleo.com/businesses?Category=Restaurants&Latitude=' + latitude + '&Longitude=' + longitude + '&Radius=20&APIKey=hnqee6js7rekm8txj7p6fqbw&ANI=4084295143';
+      var time = 10;
       $.getJSON(url,function(data) {
         $scope.listing = data.businesses; 
-            for (i = 0; i < 7; i++) {
+            for (i = 0; i < 10; i++) {
               var radlat1 = Math.PI * latitude/180;
               var radlat2 = Math.PI * $scope.listing[i].latitude/180;
               var radlon1 = Math.PI * longitude/180;
@@ -31,7 +31,7 @@ angular.module('starter.controllers', [])
               dist = dist * 60 * 1.1515;
               dist = dist.toFixed(2);
 
-              var list = document.getElementById('listing').innerHTML + '<div class="list card"><div class="item"><h2>' + $scope.listing[i].name + '</h2><p>' + $scope.listing[i].address + " " + $scope.listing[i].city + " " + $scope.listing[i].state + " " + $scope.listing[i].zip + '</p></div><a class="item item-icon-left assertive" href="#"><i class="icon ion-android-navigate"></i>Navigate (' + dist + ' miles)</a>';
+              var list = document.getElementById('listing').innerHTML + '<div class="list card"><div class="item"><h2><strong>(' + (time * (i + 1)) + ' min)</strong> ' + $scope.listing[i].name + '</h2><p>' + $scope.listing[i].address + " " + $scope.listing[i].city + " " + $scope.listing[i].state + " " + $scope.listing[i].zip + '</p></div><a class="item item-icon-left assertive" href="#"><i class="icon ion-ios-telephone"></i>Call</a><a class="item item-icon-left assertive" href="#"><i class="icon ion-android-navigate"></i>Navigate (' + dist + ' miles)</a>';
               document.getElementById('listing').innerHTML = list;
               }
       });
