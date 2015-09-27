@@ -6,7 +6,7 @@ Integrate 2015 Hackathon Project
 ## JUST (SHIP) IT!
 
 ## Team Members:
-* 1
-* 2
-* 3
+* @chriswongtv
+* @coder-guy22296
+* @lovincyrus
 * 4
