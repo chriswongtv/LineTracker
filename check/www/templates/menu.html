@@ -1,0 +1,45 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-content scroll="false">
+        <div class="col col-33 col-offset-33"><img class="profile-picture" src="img/chris.png"></div>
+        <div class="name">Chris</div>
+
+        <div class="menu-wrapper">
+          <a menu-close href="#/app/store">
+          <button class="button button-outline button-light menu-btn">
+            Home
+          </button></a><br>
+
+          <a menu-close href="#/app/rewards">
+          <button class="button button-outline button-light menu-btn">
+            Rewards
+          </button></a><br>
+
+          <button class="button button-outline button-light menu-btn">
+            Profile
+          </button><br>
+
+          <button class="button button-outline button-light menu-btn">
+            Settings
+          </button>
+      </div>
+
+      <div class="logo-footer">
+        <img src="img/isetia_white.png">
+      </div>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
