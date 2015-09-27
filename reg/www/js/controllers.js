@@ -1,6 +1,15 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('DashCtrl', function($scope) {
+  $scope.addCount = function() {
+    var url = 'https://prod-mmx-001.magnet.com:5221/mmxmgmt/api/v1/topics';
+    var currentName;
+  };
+  
+  // $.post(url, data, function(response) {
+  //   console.log('POST request success');
+  // }, 'json');
+})
 
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
