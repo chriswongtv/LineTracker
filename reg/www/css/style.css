@@ -1,6 +1,6 @@
 body .scroll-content {
 	background-image: url('../img/bg.jpg');
-	background-position: center center;
+	background-size: cover;
 }
 
 .add {
