@@ -53,7 +53,7 @@
 		};
 
 		Reservation.prototype.calculateWaitTime = function () {
-			this.waitTime = (this.posInQueue-1)*10;
+			this.waitTime = (this.posInQueue)*10;
 		};
 	
     <!-- class -->
@@ -65,6 +65,7 @@
     	WaitingListHandler.prototype.updateQueuePositions = function (){
     		for(var i = 0; i < this.numOfReservations; i++){
     			this.waitingListQueue[i].setPosInQueue(i+1);
+    			this.waitingListQueue[i].calculateWaitTime();
     		}
     	};
     	WaitingListHandler.prototype.removeReservation = function (name){
@@ -86,15 +87,15 @@
     		this.numOfReservations++;
     		this.updateQueuePositions();
     	};
-
+/*<!--test code*/ 
 	var reservationList = new WaitingListHandler();
 
 	var res = new Reservation("Bill", 4);
 
 	reservationList.addReservation(res);
-	res = new Reservation().init("Jon", 8);
+	res = new Reservation("Jon", 8);
 	reservationList.addReservation(res);
-	res = new Reservation().init("Greg", 12);
+	res = new Reservation("Greg", 12);
 	reservationList.addReservation(res);
 
 	var temp = reservationList.removeReservation("Jon");
@@ -104,7 +105,7 @@
 	temp = reservationList.removeReservation("Bill");
 	console.log(temp.username + " removed" + ": " + temp.posInQueue);
 
-	
+	/*-->*/
 
 
 
