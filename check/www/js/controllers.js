@@ -4,7 +4,7 @@ angular.module('starter.controllers', [])
   // document.addEventListener("deviceready", function () {
   //   $cordovaPlugin.someFunction().then(success, error);
   // }, false);
-
+  $scope.restaurants = [];
   var posOptions = {timeout: 10000, enableHighAccuracy: false};
   var location = $cordovaGeolocation.getCurrentPosition(posOptions);
   location.then(function (position) {
@@ -39,6 +39,9 @@ angular.module('starter.controllers', [])
     // error
   });
 
+})
+
+.controller('DetailsCtrl', function($scope) {
 })
 
 .controller('DashCtrl', function($scope) {})
