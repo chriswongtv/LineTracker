@@ -1,0 +1,75 @@
+var findChannel = {"results": [
+        {
+            "topic": "company_announcements",
+            "collection": false,
+            "subscriptionCount": 1,
+            "description": "Channel for company-wide announcements",
+            "displayName": "Company Announcements",
+            "creationDate": "2015-04-15T19:10:49.838Z",
+            "modificationDate": "2015-04-15T19:10:49.840Z",
+            "persistent": true,
+            "maxItems": 43200,
+            "maxPayloadSize": 2097152,
+            "publisherType": "anyone",
+            "tags": [
+            ],
+            "subscriptionEnabled": true
+        },
+        {
+            "topic": "lunch_buddies",
+            "collection": false,
+            "subscriptionCount": 0,
+            "description": "The hardest decision of the day",
+            "displayName": "Lunch Buddies",
+            "creationDate": "2015-04-16T05:41:43.012Z",
+            "modificationDate": "2015-04-16T05:41:43.014Z",
+            "persistent": true,
+            "maxItems": 43200,
+            "maxPayloadSize": 2097152,
+            "publisherType": "anyone",
+            "tags": [
+            ],
+            "subscriptionEnabled": true
+        }
+    ],
+    "total": 2,
+    "offset": 0,
+    "size": 100
+}
+
+var getTopicsItems = {"totalCount": 1, "items": [
+      {
+         "appId": "n9ci8ffoitr",
+         "topic": "testtopic4",
+         "itemId": "228bb4bcc12a5334137c39af468ef18c",
+         "meta": null,
+         "payload": {
+            "mtype": "normal",
+            "creationDate": "2015-04-21T16:19:53Z",
+            "data": "testmessage 1"
+         },
+         "publisher": {
+            "username": "serveruser",
+            "deviceId": null
+         }
+      },
+      {
+         "appId": "n9ci8ffoitr",
+         "topic": "testtopic4",
+         "itemId": "nasdaaeadaaa5334137c39af468ef18c",
+         "meta": null,
+         "payload": {
+            "mtype": "normal",
+            "creationDate": "2015-04-27T16:19:53Z",
+            "data": "testmessage 2"
+         },
+         "publisher": {
+            "username": "serveruser",
+            "deviceId": null
+         }
+      }     
+   ]
+}
+
+var Channel = JSON.parse(findChannel);
+document.write(Channel.topic + "testing, see if it works here! ");
