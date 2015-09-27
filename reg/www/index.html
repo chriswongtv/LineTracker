@@ -22,6 +22,119 @@
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
+	<script>
+    "use strict";
+
+	<!-- class -->
+	function Reservation(inName, inPartySize) {
+		<!-- variables -->
+		this.username = inName;
+		this.partySize = inPartySize;
+		this.waitTime = 0;
+		this.posInQueue = 0;
+	}
+		
+
+		<!-- constructor -->
+		Reservation.prototype = {
+			constructor: Reservation,
+			//this.username = inName;
+			//this.partySize = inPartySize;
+			//console.log("constructor called");
+		};
+		<!-- functions -->
+		Reservation.prototype.getWaitTime = function (){
+			calculateWaitTime();
+			return this.waitTime;
+		};
+
+		Reservation.prototype.setPosInQueue = function (inPosInQueue){
+			this.posInQueue = inPosInQueue;
+		};
+
+		Reservation.prototype.calculateWaitTime = function () {
+			this.waitTime = (this.posInQueue)*10;
+		};
+	
+    <!-- class -->
+    function WaitingListHandler(){}
+    	WaitingListHandler.prototype.waitingListQueue = [];
+    	WaitingListHandler.prototype.waitingListSearchKeys = [];
+    	WaitingListHandler.prototype.numOfReservations = 0;
+
+    	WaitingListHandler.prototype.updateQueuePositions = function (){
+    		for(var i = 0; i < this.numOfReservations; i++){
+    			this.waitingListQueue[i].setPosInQueue(i+1);
+    			this.waitingListQueue[i].calculateWaitTime();
+    		}
+    	};
+    	WaitingListHandler.prototype.removeReservation = function (name){
+    		var targetIndex = this.waitingListSearchKeys.indexOf(name);
+    		var target = this.waitingListQueue[targetIndex];
+
+    		<!-- remove item from both arrays -->
+    		this.waitingListQueue.splice(targetIndex, 1);
+    		this.waitingListSearchKeys.splice(targetIndex, 1);
+
+    		<!-- decrement the number of reservations -->
+    		this.numOfReservations--;
+    		this.updateQueuePositions();
+    		return target;
+    	};
+    	WaitingListHandler.prototype.addReservation = function (reservation){
+    		this.waitingListQueue.push(reservation);
+    		this.waitingListSearchKeys.push(reservation.username);
+    		this.numOfReservations++;
+    		this.updateQueuePositions();
+    	};
+/*<!--test code*/ 
+	var reservationList = new WaitingListHandler();
+
+	var res = new Reservation("Bill", 4);
+
+	reservationList.addReservation(res);
+	res = new Reservation("Jon", 8);
+	reservationList.addReservation(res);
+	res = new Reservation("Greg", 12);
+	reservationList.addReservation(res);
+
+	var temp = reservationList.removeReservation("Jon");
+	console.log(temp.username + " removed" + ": " + temp.posInQueue);
+	temp = reservationList.removeReservation("Greg");
+	console.log(temp.username + " removed" + ": " + temp.posInQueue);
+	temp = reservationList.removeReservation("Bill");
+	console.log(temp.username + " removed" + ": " + temp.posInQueue);
+
+	/*-->*/
+
+
+
+
+
+
+	<!-- class -->
+	function comunicationToolkit(){
+		function handleRecievedCommand(commandStr, data){
+			switch(commandStr){
+				case "getPositionInQueue":
+
+					break;
+			}
+		}
+	}
+
+	<!-- global funtions -->
+
+
+	<!--var res1 = new Reservation("bill", 4, 1);-->
+
+	<!-- Reservation info -->
+
+
+		function myFunction() {
+		    document.getElementById("demo").innerHTML = "Paragraph changed.";
+		}
+	</script>
   </head>
   <body ng-app="starter">
     <!--
@@ -38,4 +151,8 @@
     -->
     <ion-nav-view></ion-nav-view>
   </body>
+
+
+
 </html>
+
