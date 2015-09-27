@@ -1,1 +1,16 @@
-/* Empty. Add your own CSS if you like */
+body .scroll-content {
+	background-image: url('../img/bg.jpg');
+	background-position: center center;
+}
+
+.add {
+	margin: 7em;
+}
+
+.submit-btn {
+	text-align: center;
+}
+
+.list-dp {
+	margin: 7em;
+}
