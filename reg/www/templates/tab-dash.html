@@ -4,23 +4,23 @@
       <div class="list">
         <label class="item item-input">
           <span class="input-label">Name</span>
-          <input type="text" ng-model="nameInput">
+          <input type="text">
         </label>
         <label class="item item-input">
           <span class="input-label">Party Size</span>
-          <input type="number" ng-model="sizeInput">
+          <input type="number">
         </label>
       </div>
       <div class="submit-btn">
-        <button class="button icon-left ion-checkmark button-positive" ng-click="addCount(nameInput, sizeInput); showAlert(); nameInput = null; sizeInput = null;">Submit</button>
+        <button class="button icon-left ion-checkmark button-positive" ng-click="addCount()">Submit</button>
       </div>
     </div>
     <div class="list-dp">
       <ul class="list">
-        <li class="item" ng-repeat="x in reservationHandler.waitingListQueue" ng-click="removeUser(x.username)">
-          {{x.username}}
+        <li class="item">
+          Chris
           <span class="item-note">
-            {{x.partySize}}
+            4
           </span>
         </li>
       </ul>
