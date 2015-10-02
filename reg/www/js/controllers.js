@@ -1,9 +1,87 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, $ionicPopup) {
-  // <!-- class -->
+.controller('DashCtrl', function($scope, $http) {
+  var reservationHandler = new WaitingListHandler();
+
+
+ function netcodeOPS(){}
+
+netcodeOPS.prototype.sendMessage = function (appID, apiKey, contentType, channelName, message){
+
+  var req = 
+  {
+      method: 'POST',
+      url: ('https://prod-mmx-001.magnet.com:5221/mmxmgmt/api/v1/topics/' + channelName + '/publish'),
+      data: '{"content": {"message":" ' + message + ' ", "messageType":"normal", "contentType":"text" }}',
+      headers: {
+      'X-mmx-app-id': appID,
+      'X-mmx-api-key': apiKey,
+      'Content-Type': contentType
+    }
+  }
+
+  $http(req).
+  success(function(data, status, headers, config) 
+  {
+      console.log("success23124");
+  }).
+  error(function(data, status, headers, config) 
+  {
+      //error
+  });
+  // //The url we want is `www.nodejitsu.com:1337/`
+  // var options = {
+  //   protocol: 'https',
+  //   host: 'prod-mmx-001.magnet.com',
+  //   path: '/mmxmgmt/api/v1/topics/' + channelName + '/publish',
+  //   //since we are listening on a custom port, we need to specify it by hand
+  //   port: '5221',
+
+  //   headers: {
+  //     'X-mmx-app-id': '' + appID + '',
+  //     'X-mmx-api-key': '' + apiKey + '',
+  //     'Content-Type': '' + contentType + '',
+
+  //   },
+
+  //   //This is what changes the request to a POST request
+  //   method: 'POST'
+  // };
+
+  // callback = function(response) {
+  //   var str = ''
+  //   response.on('data', function (chunk) {
+  //     str += chunk;
+  //   });
+
+  //   response.on('end', function () {
+  //     console.log(str);//output
+  //   });
+  // }
+  // var req = http.request(options, callback);
+  // //This is the data we are posting, it needs to be a string or a buffer
+  // req.write( '{"content": {"message":" ' + message + ' ", "messageType":"normal", "contentType":"text" }}' );//********maybe same as data
+  // req.end();
+}
+
+var netOPS = new netcodeOPS();
+netOPS.sendMessage('gudif1h0wj3', 
+  '69a7082d-b1f6-4c28-8f5d-2412da584590', 
+  'application/json',
+  'testtopic4',
+  'welcome from nodeJS -CanY');
+
+
+  $scope.addCount = function(inPartyName, inPartySize) {
+    var url = 'https://prod-mmx-001.magnet.com:5221/mmxmgmt/api/v1/topics';
+    var currentName;
+
+    reservationHandler.addReservation(new Reservation(inPartyName, inPartySize));
+  };
+  
+  <!-- class -->
   function Reservation(inName, inPartySize) {
-    // <!-- variables -->
+    <!-- variables -->
     this.username = inName;
     this.partySize = inPartySize;
     this.waitTime = 0;
@@ -11,14 +89,14 @@ angular.module('starter.controllers', [])
   }
     
 
-    // <!-- constructor -->
+    <!-- constructor -->
     Reservation.prototype = {
       constructor: Reservation,
       //this.username = inName;
       //this.partySize = inPartySize;
       //console.log("constructor called");
     };
-    // <!-- functions -->
+    <!-- functions -->
     Reservation.prototype.getWaitTime = function (){
       calculateWaitTime();
       return this.waitTime;
@@ -32,19 +110,14 @@ angular.module('starter.controllers', [])
       this.waitTime = (this.posInQueue)*10;
     };
   
-    // <!-- class -->
-    function WaitingListHandler() {}
-
+    <!-- class -->
+    function WaitingListHandler(){}
       WaitingListHandler.prototype.waitingListQueue = [];
       WaitingListHandler.prototype.waitingListSearchKeys = [];
       WaitingListHandler.prototype.numOfReservations = 0;
 
-      WaitingListHandler.prototype.getWaitTime = function() {
-        return this.numOfReservations * 10;
-      }
-
       WaitingListHandler.prototype.updateQueuePositions = function (){
-        for(var i = 0; i < this.numOfReservations; i++) {
+        for(var i = 0; i < this.numOfReservations; i++){
           this.waitingListQueue[i].setPosInQueue(i+1);
           this.waitingListQueue[i].calculateWaitTime();
         }
@@ -53,11 +126,11 @@ angular.module('starter.controllers', [])
         var targetIndex = this.waitingListSearchKeys.indexOf(name);
         var target = this.waitingListQueue[targetIndex];
 
-        // <!-- remove item from both arrays -->
+        <!-- remove item from both arrays -->
         this.waitingListQueue.splice(targetIndex, 1);
         this.waitingListSearchKeys.splice(targetIndex, 1);
 
-        // <!-- decrement the number of reservations -->
+        <!-- decrement the number of reservations -->
         this.numOfReservations--;
         this.updateQueuePositions();
         return target;
@@ -68,44 +141,9 @@ angular.module('starter.controllers', [])
         this.numOfReservations++;
         this.updateQueuePositions();
       };
-  
-  $scope.reservationHandler = new WaitingListHandler();
-
-  $scope.addCount = function(inPartyName, inPartySize) {
-    //console.log(inPartyName + ' ' + inPartySize);
-
-    $scope.reservationHandler.addReservation(new Reservation(inPartyName, inPartySize));
-    // var link = 'https://prod-mmx-001.magnet.com:5221/mmxmgmt/api/v1/topics?topicName=test';
-    // var JSonData = '{"content":"I would like to recommend a new restaurant to you all", "messageType":"normal","contentType":"text"}';
-    // $.ajax({
-    //    url : link,
-    //    data : JSON.stringify(JSonData),
-    //    type : 'POST',
-    //    contentType : "application/json",
-    //    dataType : 'json',
-    //    success : function(Result) {
-    //     console.log('success');
-    //    },
-    //    beforeSend: function (xhr) {
-    //       xhr.setRequestHeader('X-mmx-app-id', 'gudif1h0wj3');
-    //       xhr.setRequestHeader('X-mmx-api-key', '69a7082d-b1f6-4c28-8f5d-2412da584590');
-    //    },
-    //    error: function (RcvData, error) {
-    //       console.log(RcvData);
-    //    }
-  }
-
-  $scope.showAlert = function() {
-    var time = $scope.reservationHandler.getWaitTime();
-    var alertPopup = $ionicPopup.alert({
-       title: 'Estimated Waiting Time',
-       template: '<center>' + time + ' minutes</center>'
-     });
-  }
-
-  $scope.removeUser = function(name) {
-    $scope.reservationHandler.removeReservation(name);
-  }
+  // $.post(url, data, function(response) {
+  //   console.log('POST request success');
+  // }, 'json');
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {
